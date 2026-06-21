@@ -43,7 +43,7 @@ const AdminPage = () => {
         type={type}
         placeholder={placeholder}
         name={name}
-        className="w-full bg-[#F1F3F4] hover:bg-[#E8EAED] focus:bg-white border-b-2 border-transparent focus:border-[#0B57D0] rounded-md p-3 text-xs transition-all outline-none"
+        className="w-full bg-[#F1F3F4] hover:bg-[#E8EAED] focus:bg-white border-b-2 border-transparent focus:border-[#0B57D0] rounded-2xl p-5 text-xs transition-all outline-none"
       />
     </div>
   );
@@ -77,55 +77,96 @@ const AdminPage = () => {
 
           <form onSubmit={handleSubmit} className="space-y-10">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-8">
+              <div className="flex flex-col gap-1.5">
+                <label className="ml-4 text-[12px] font-medium text-[#44474E]">
+                Surname
+                </label>
+                <input
+                  type={'text'}
+                  placeholder={'Adebayo'}
+                  name={'surname'}
+                  required
+                  className="w-full bg-[#F1F3F4] hover:bg-[#E8EAED] focus:bg-white border-b-2 border-transparent focus:border-[#0B57D0] rounded-2xl p-5 text-xs transition-all outline-none"
+                />
+              </div>
+
+              <div className="flex flex-col gap-1.5">
+                <label className="ml-4 text-[12px] font-medium text-[#44474E]">
+                First Name
+                </label>
+                <input
+                  type={'text'}
+                  placeholder={'Samuel'}
+                  name={'firstname'}
+                  required
+                  className="w-full bg-[#F1F3F4] hover:bg-[#E8EAED] focus:bg-white border-b-2 border-transparent focus:border-[#0B57D0] rounded-2xl p-5 text-xs transition-all outline-none"
+                />
+              </div>
+
+              <div className="flex flex-col gap-1.5">
+                <label className="ml-4 text-[12px] font-medium text-[#44474E]">
+                Middle Name
+                </label>
+                <input
+                  type={'text'}
+                  placeholder={'Optional'}
+                  name={'middlename'}
+                  required
+                  className="w-full bg-[#F1F3F4] hover:bg-[#E8EAED] focus:bg-white border-b-2 border-transparent focus:border-[#0B57D0] rounded-2xl p-5 text-xs transition-all outline-none"
+                />
+              </div>
               
-              <InputField 
-                label="Surname" required
-                placeholder="e.g. Adebayo" 
-                name={'surname'}
-              />
+              <div className="flex flex-col gap-1.5">
+                <label className="ml-4 text-[12px] font-medium text-[#44474E]">
+                Phone number
+                </label>
+                <input
+                  type={'number'}
+                  placeholder={'080xxxxxxxxx'}
+                  name={'phoneNumber'}
+                  required
+                  className="w-full bg-[#F1F3F4] hover:bg-[#E8EAED] focus:bg-white border-b-2 border-transparent focus:border-[#0B57D0] rounded-2xl p-5 text-xs transition-all outline-none"
+                />
+              </div>
 
-              <InputField 
-                label="First Name" required
-                placeholder="e.g. Samuel" 
-                name={'firstname'}
-              />
+              <div className="flex flex-col gap-1.5">
+                <label className="ml-4 text-[12px] font-medium text-[#44474E]">
+                Date of Birth
+                </label>
+                <input
+                  type={'text'}
+                  placeholder={'DD/MM/YYYY'}
+                  name={'dateOfBirth'}
+                  required
+                  className="w-full bg-[#F1F3F4] hover:bg-[#E8EAED] focus:bg-white border-b-2 border-transparent focus:border-[#0B57D0] rounded-2xl p-5 text-xs transition-all outline-none"
+                />
+              </div>
 
-              <InputField 
-                label="Middle Name" 
-                placeholder="Optional" 
-                name={'middlename'}
-              />
-
-              <InputField 
-                label="Phone Number" type="tel" required
-                placeholder="080XXXXXXXX" 
-                name={'phoneNumber'}
-              />
-
-              <InputField 
-                label="Date of Birth" 
-                placeholder="DD/MM/YYYY" 
-                name={'dateOfBirth'}
-              />
-
-              <InputField 
-                label="Email" type="email"
-                placeholder="teen@example.com" 
-                name={'emailAddress'}
-              />
+              <div className="flex flex-col gap-1.5">
+                <label className="ml-4 text-[12px] font-medium text-[#44474E]">
+                Email
+                </label>
+                <input
+                  type={'email'}
+                  placeholder={'teen@gmail.com'}
+                  name={'emailAddress'}
+                  required
+                  className="w-full bg-[#F1F3F4] hover:bg-[#E8EAED] focus:bg-white border-b-2 border-transparent focus:border-[#0B57D0] rounded-2xl p-5 text-xs transition-all outline-none"
+                />
+              </div>
 
               {/* Gender Segmented Button Group */}
               <div className="flex flex-col gap-1.5">
                 <label className="ml-4 text-[12px] font-medium text-[#44474E]">Gender</label>
-                <div className="flex bg-[#F1F3F4] text-xs p-1 rounded-lg border border-[#DEE2E6]">
+                <div className="flex bg-[#F1F3F4] text-xs p-1 rounded-3xl border border-[#DEE2E6]">
                   {['Male', 'Female'].map((item) => (
                     <button
                       key={item}
                       type="button"
                       onClick={() => setnewdata({ ...newdata, gender: item })}
-                      className={`flex-1 py-3 rounded-md text-sm font-medium transition-all ${
+                      className={`flex-1 p-5 rounded-3xl text-sm font-bold transition-all ${
                         newdata.gender === item 
-                        ? "bg-green-200 text-[#041E49]" 
+                        ? "bg-green-200 text-green-900" 
                         : "text-[#44474E] hover:bg-black/5"
                       }`}
                     >
@@ -140,9 +181,12 @@ const AdminPage = () => {
             <div className="flex justify-center md:justify-end pt-8 border-t border-[#F1F3F4]">
               <button
                 type="submit"
-                className="w-full text-xs p-3 md:w-auto flex items-center justify-center gap-3 bg-[#0B57D0] text-white px-3 rounded-lg font-medium hover:shadow-lg active:scale-95 transition-all"
+                className="w-full text-xs p-6 md:w-auto flex items-center justify-center gap-3 bg-[#0B57D0] text-white px-6 rounded-3xl font-bold hover:shadow-lg active:scale-95 transition-all"
               >
-                Register Member <Check size={20} />
+                Register Member 
+                <span className="p-2 bg-white rounded-xl text-blue-600">
+                  <Check size={20} />
+                </span>
               </button>
             </div>
           </form>

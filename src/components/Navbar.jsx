@@ -28,39 +28,49 @@ const Navbar = () => {
                 {/* menu */}
               <div 
               onClick={() => setsidebar(!sidebar)}
-              className="p-2 rounded-xl bg-gray-100 cursor-pointer">
+              className="p-2 rounded-xl cursor-pointer">
                 <Menu size={16} 
                 className='text-gray-700/70'/>
               </div>
 
-              <h1 className="font-semibold text-md flex flex-col">
+              <h1 className="font-semibold text-md max-sm:text-sm flex flex-col">
                 Teens Attendance
-                <p className='text-xs text-gray-500 font-normal p-2 max-md:hidden rounded-4xl bg-gray-200'>RCCG Miracle Center</p>
+                <p className='text-xs text-gray-500 max-md:hidden rounded-4xl font-semibold'>RCCG Miracle Center</p>
               </h1>
           </div>
 
-          <div className="flex gap-3 items-center">
+          <div className="flex gap-1 items-center">
             {/* refresh button */}
-            <button
+            <motion.button
+            whileHover={{scale:[1.2,1,1.1]}}
             onClick={() => refreshpage()}
-            className=" p-2 flex justify-center gap-3 items-center text-gray-600 rounded-4xl text-xs cursor-pointer" >
-              <span className="max-md:hidden bg-gray-200/80 p-2 rounded-md">Refresh Page</span>
-             <span className="bg-gray-200/80 p-2 rounded-md">
+            className=" p-2 flex justify-center gap-1 items-center text-gray-600 text-xs cursor-pointer duration-200" >
+              <span className="max-md:hidden bg-gray-200/80 p-2 rounded-3xl rounded-r-xl">Refresh Page</span>
+             <span className="bg-gray-200/80 p-2 rounded-xl max-sm:rounded-r-xl rounded-r-3xl">
               <Loader2Icon size={14} className={`${loading && 'animate-spin'}`}
              size={17}/>
              </span>
              
-            </button>
+            </motion.button>
+
             {/* home button */}
             <Link to={'/'}
-            className='p-3 hover:bg-green-100/90 rounded-md'>
-              <Home className='text-green-700' size={14} />
-              
+            className='p-3 hover:bg-green-100/90 rounded-xl duration-200'>
+              <motion.div 
+              className="">
+                <Home className='text-green-700' size={20} />
+              </motion.div>
             </Link>
             {/* Admin login */}
-          <Link to={'./admin'} className="bg-blue-600 hover:bg-blue-700/80 rounded-md text-white font-bold p-2 px-3 text-xs flex justify-between items-center gap-3 cursor-pointer  duration-200">
+          <Link to={'./admin'} className="bg-blue-600 hover:bg-blue-700/80 rounded-3xl text-white font-bold p-2 px-3 hover:px-4 text-xs flex justify-between 
+          items-center gap-3 cursor-pointer  duration-200">
             <span  className='max-md:hidden'>Admin Login</span>
-            <Key size={16} className='rotate-40'/>
+            <div className="max-sm:hidden p-2 rounded-xl bg-white text-blue-600">
+              <Key size={16} className='rotate-40'/>
+            </div>
+            <div className="sm:hidden">
+              <Key size={16} className='rotate-40'/>
+            </div>
           </Link>
           </div>
       </div>

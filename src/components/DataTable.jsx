@@ -48,7 +48,7 @@ const DataTable = ({ onDownload }) => {
         surname: ${texttocopy.surname},
         firstName: ${texttocopy.firstName},
         middleName: ${texttocopy.middleName},
-        phoneNumber: ${texttocopy.newPhone}, 
+        phoneNumber: ${texttocopy.phoneNumber}, 
         dateOfBirth: ${texttocopy.dateOfBirth} ,
         emailAddress: ${texttocopy.emailAddress},
         gender: ${texttocopy.gender},`

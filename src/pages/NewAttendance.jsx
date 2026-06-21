@@ -35,7 +35,7 @@ const NewAttendance = () => {
               <select
                 value={newdetail.year}
                 onChange={(e) => setnewdetail({ ...newdetail, year: e.target.value })}
-                className="w-full border-0 bg-gray-100 rounded-lg p-3 text-xs focus:ring-2 focus:ring-blue-200"
+                className="w-full border-0 bg-blue-100 rounded-xl rounded-l-3xl p-5 sm:py-7  text-xs focus:ring-2 focus:ring-blue-200"
               >
                 {["2026", "2025", "2024"].map((item) => (
                   <option key={item} value={item}>{item}</option>
@@ -49,7 +49,7 @@ const NewAttendance = () => {
               <select
                 value={newdetail.month}
                 onChange={(e) => setnewdetail({ ...newdetail, month: e.target.value })}
-                className="w-full border-0 bg-gray-100 rounded-lg p-3 text-xs focus:ring-2 focus:ring-blue-200"
+                className="w-full border-0 bg-blue-100 rounded-xl p-5 sm:py-7  text-xs focus:ring-2 focus:ring-blue-200"
               >
                 {['January','February','March','April','May','June','July','August','September','October','November','December']
                   .map((item) => (
@@ -64,7 +64,7 @@ const NewAttendance = () => {
               <select
                 value={newdetail.week}
                 onChange={(e) => setnewdetail({ ...newdetail, week: e.target.value })}
-                className="w-full border-0 bg-gray-100 rounded-lg p-3 text-xs focus:ring-2 focus:ring-blue-200"
+                className="w-full border-0 bg-blue-100 rounded-xl rounded-r-3xl p-5 sm:py-7 text-xs focus:ring-2 focus:ring-blue-200"
               >
                 {['week 1', 'week 2', 'week 3', 'week 4','week 5'].map((item) => (
                   <option key={item} value={item}>{item}</option>
@@ -76,7 +76,8 @@ const NewAttendance = () => {
           <div className="mt-10 flex justify-center">
             <button
               onClick={handleCreate}
-              className="flex items-center gap-3 bg-linear-to-bl from-blue-800 to-indigo-500 hover:from-blue-700 hover:to-indigo-600 text-white px-10 p-3 rounded-xl text-base font-medium shadow-md transition-all active:scale-95"
+              className="flex items-center gap-3 bg-linear-to-br from-blue-400 to-blue-900   hover:scale-103 text-white px-10 p-5 rounded-3xl
+               text-base font-bold shadow-md transition-all active:scale-95 duration-200 cursor-pointer"
             >
               Create Attendance
               <Calendar size={22} />

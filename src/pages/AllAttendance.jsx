@@ -75,8 +75,9 @@ const AllAttendance = () => {
     setattendancedate({ year: String(att.year), month: att.month, week: att.week });
   };
 
-    const DateSelect = ({ value, set, options }) => (
-  <select value={value} onChange={(e) => setsearchatt({...searchatt, [set]:e.target.value})} className="flex-1 bg-gray-100 border-0 rounded-lg p-3 px-4 text-xs font-bold capitalize outline-none">
+    const DateSelect = ({ value, set, options,type }) => (
+  <select value={value} onChange={(e) => setsearchatt({...searchatt, [set]:e.target.value})} 
+  className={`flex-1 ${type == 'year' ? 'rounded-l-3xl' : type == 'week' ? 'rounded-r-3xl' : ''} bg-blue-100 border-0 rounded-lg p-5 sm:py-6 px-4 text-xs font-bold capitalize outline-none`}>
     {options.map(o => <option key={o} value={o}>{o}</option>)}
   </select>
   )
@@ -100,21 +101,21 @@ const AllAttendance = () => {
           <button 
             onClick={downloadAllHistory}
             disabled={attendance.length === 0}
-            className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-xs rounded-lg text-white px-6 py-3 shadow-lg transition-all active:scale-95 disabled:opacity-50"
+            className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-xs rounded-2xl text-white px-6 py-5 shadow-lg transition-all active:scale-95 disabled:opacity-50"
           >
             <FileText size={20} /> Download All (PDF)
           </button>
         </div>
 
         {/* search attendance */}
-        <div className="w-full my-3 sticky top-40 ">
+        <div className="w-full my-3 sticky bg-white z-20 p-3 top-40 ">
           <h1 className="text-md py-3 pl-3 text-xs">Search attendance</h1>
            <div className="w-full flex gap-3">
-             <DateSelect value={searchatt.year} set={'year'}
+             <DateSelect type='year' value={searchatt.year} set={'year'}
              options={['2026', '2025']} />
-            <DateSelect value={searchatt.month} set={'month'}  options={['january','february','march','april','may','june','july','august','september','october','november','december']} />
-            <DateSelect value={searchatt.week} set={'week'}  options={['week 1','week 2','week 3','week 4','week 5']} />
-            {searchatt.year || searchatt.month || searchatt.week ? <button 
+            <DateSelect type='month' value={searchatt.month} set={'month'}  options={['january','february','march','april','may','june','july','august','september','october','november','december']} />
+            <DateSelect type='week' value={searchatt.week} set={'week'}  options={['week 1','week 2','week 3','week 4','week 5']} />
+            {searchatt.year  || searchatt.month || searchatt.week ? <button 
             onClick={() => setsearchatt({ year: '', month: '', week:'',  })}
             className="bg-red-500 text-white md:px-3 max-md:bg-white max-md:text-red-500 md:hover:bg-red-600 rounded-full text-xs flex justify-center font-semibold gap-3 items-center">
               <span className="max-md:hidden">Cancel</span>
@@ -132,10 +133,10 @@ const AllAttendance = () => {
               return (
                 <motion.div 
                   key={att._id}
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 50 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.05 }}
-                  className="bg-white border border-gray-200 rounded-xl p-4 flex flex-wrap items-center justify-between transition-all group"
+                  transition={{ delay: i * 0.2 }}
+                  className="border border-blue-100 bg-white hover:scale-102 rounded-2xl p-4 sm:py-5 flex flex-wrap items-center justify-between transition-all group"
                 >
                   <div 
                     className="flex items-center gap-4 cursor-pointer flex-1 min-w-[200px]"
@@ -153,7 +154,7 @@ const AllAttendance = () => {
                   </div>
 
                   <div className="max-sm:w-full flex items-center max-sm:flex-col  gap-4 mt-4 md:mt-0">
-                    <div className="w-full flex justify-center gap-4 text-sm rounded-lg bg-gray-50 px-4 py-2 border border-gray-100">
+                    <div className="w-full flex justify-center gap-4 text-sm rounded-lg bg-gray-50 sm:py-5 px-4 py-2 border border-gray-100">
                       <div className="text-center">
                         <p className="text-gray-400 uppercase text-[9px] font-bold">Present</p>
                         <p className="font-bold text-green-600">{present}</p>
@@ -167,7 +168,7 @@ const AllAttendance = () => {
                     <div className="w-full flex justify-center items-center gap-1">
                       <button 
                         onClick={() => downloadSingleAttendance(att)}
-                        className="p-3 w-full bg-blue-100 flex justify-center rounded-md text-blue-600 hover:bg-blue-50 transition-colors"
+                        className="p-5 w-full bg-blue-100 flex justify-center rounded-xl rounded-l-3xl text-blue-600 hover:bg-blue-50 transition-colors"
                         title="Download this record"
                       >
                         <Download size={14} />
@@ -180,7 +181,7 @@ const AllAttendance = () => {
                             deleteattendance(att._id); 
                           }
                         }}
-                        className="p-3 w-full bg-red-100 flex justify-center rounded-md text-red-500 hover:bg-red-50 transition-colors"
+                        className="p-5 w-full bg-red-100 flex justify-center rounded-xl rounded-r-3xl text-red-500 hover:bg-red-50 transition-colors"
                         title="Delete Record"
                       >
                         <Trash2 size={14} />

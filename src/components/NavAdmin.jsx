@@ -14,7 +14,7 @@ const NavAdmin = () => {
 
   return (
     <nav className="w-full sticky top-20 left-0 z-40 py-4 flex justify-center items-center">
-      <div className="w-full md:max-w-[570px] mx-auto bg-gray-100/90 rounded-lg p-1 flex justify-start items-center gap-2 border border-gray-300 overflow-x-auto no-scrollbar">
+      <div className="w-full md:max-w-[570px] mx-auto bg-gray-100/90 rounded-3xl p-1 flex justify-start items-center gap-2 border border-blue-200 overflow-x-auto no-scrollbar">
         {allnav.map((item) => {
           const isActive = locator === item.link;
           
@@ -23,14 +23,14 @@ const NavAdmin = () => {
               to={item.link} 
               key={item.id}
               className={`
-                flex shrink-0 text-xs items-center gap-2  p-3 rounded-md font-medium transition-all duration-200
+                flex shrink-0 text-xs items-center gap-2  p-4 rounded-3xl transition-all duration-200
                 ${isActive 
-                  ? "bg-blue-200 text-[#041E49]" 
+                  ? "bg-blue-600 text-white" 
                   : "bg-transparent text-[#44474E] hover:bg-gray-200/80"
                 }
               `}
             >
-              <span className={`${isActive ? "text-[#0B57D0]" : "text-[#44474E]"}`}>
+              <span className={`${isActive ? "text-white" : "text-[#44474E]"}`}>
                 {item.icon}
               </span>
               {item.title}
