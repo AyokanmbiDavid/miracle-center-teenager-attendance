@@ -3,9 +3,10 @@ import React, { createContext, useState, useEffect, useCallback } from 'react';
 import { useIndexedDB } from '../hooks/useIndexedDB';
 
 export const all_provider = createContext();
-
+const first_url =  "https://teens-attendance-backend.onrender.com/api"
+const second_url = "http://localhost:5000/api"
 const api = axios.create({
-  baseURL: "https://teens-attendance-backend.onrender.com/api",
+  baseURL: first_url,
   timeout: 15000, 
   headers: {
     'Content-Type': 'application/json',
@@ -53,7 +54,7 @@ const ContextProvider = ({ children }) => {
   const fetchAttendance = useCallback(async () => {
     try {
       Notify("loading", 'updating attendance history');
-      const aRes = await api.get('/attendance');
+      const aRes = await api.get('/allattendance');
       
       // Handle either wrapped data payloads or plain array streams safely
       const fetchedHistory = aRes.data.data || aRes.data; 
@@ -72,7 +73,7 @@ const ContextProvider = ({ children }) => {
       Notify("loading", 'syncing all data...');
       const [mRes, aRes] = await Promise.all([
         api.get('/members'),
-        api.get('/attendance')
+        api.get('/allattendance')
       ]);
 
       setalldata(mRes.data);
