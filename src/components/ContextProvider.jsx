@@ -6,7 +6,7 @@ export const all_provider = createContext();
 const first_url =  "https://teens-attendance-backend.onrender.com/api"
 const second_url = "http://localhost:5000/api"
 const api = axios.create({
-  baseURL: first_url,
+  baseURL: second_url,
   timeout: 15000, 
   headers: {
     'Content-Type': 'application/json',
@@ -43,27 +43,27 @@ const ContextProvider = ({ children }) => {
       Notify("loading", 'updating member directory');
       const mRes = await api.get('/members');
       setalldata(mRes.data);
-      Notify("success", "members updated");
+      Notify("success", "getting teenagers list");
     } catch (err) {
-      console.error("Member sync failed.", err.message);
-      Notify('failure', 'could not update members');
+      console.error("Server network failed.", err.message);
+      Notify('failure', 'could not reach server');
     }
   }, []);
 
   // 2. Fetch Attendance Target (Fetches full list, no page limit counters)
   const fetchAttendance = useCallback(async () => {
     try {
-      Notify("loading", 'updating attendance history');
+      Notify("loading", 'fetching Attendance history');
       const aRes = await api.get('/allattendance');
       
       // Handle either wrapped data payloads or plain array streams safely
       const fetchedHistory = aRes.data.data || aRes.data; 
       setattendance(fetchedHistory);
       
-      Notify("success", "attendance updated");
+      Notify("success", "attendance history fetched");
     } catch (err) {
       console.error("Attendance data synced.", err.message);
-      Notify('failure', 'could not update attendance');
+      Notify('failure', 'could not reach server');
     }
   }, []);
 
@@ -79,10 +79,10 @@ const ContextProvider = ({ children }) => {
       setalldata(mRes.data);
       setattendance(aRes.data.data || aRes.data);
       
-      Notify("success", "Connected");
+      Notify("success", "Good to go");
     } catch (err) {
       console.error("Full sync failed.", err.message);
-      Notify('failure', 'network sync failed');
+      Notify('failure', 'network breached server');
     }
   }, []);
 
@@ -114,20 +114,20 @@ const ContextProvider = ({ children }) => {
 
   // Member Action Mutations
   const addnewmember = async (surname, firstName, middleName, phoneNumber, dateOfBirth, gender, emailAddress) => {
-    Notify("loading", "Adding new member");
+    Notify("loading", "Adding new member to teenagers list");
     const findmember = alldata.find(e => e.surname == surname && e.firstName == firstName && e.middleName == middleName);
 
     if (!findmember) {
       try {
         await api.post('/members', { surname, firstName, middleName, phoneNumber, dateOfBirth, gender, emailAddress });
         await fetchMembers(); 
-        Notify("success", "New Member Added");
+        Notify("success", "New child data added");
       } catch (err) { 
-        Notify("failure", "Failed to add member");
+        Notify("failure", "Failed to add teenager's data");
         console.error(err);
       } 
     } else {
-      Notify('failure', 'Member data already registered');
+      Notify('failure', 'someones data already exist on list');
     }
   };
 
@@ -136,8 +136,8 @@ const ContextProvider = ({ children }) => {
     try {
       await api.put(`members/${id}`, data);
       await fetchMembers(); 
-      Notify("success", "member data updated");
-    } catch (err) { Notify("failure", "Failed"); console.error(err); }
+      Notify("success", "Someones data updated");
+    } catch (err) { Notify("failure", "Could not reach server"); console.error(err); }
   };
 
   const deletemember = async (id) => {
@@ -145,8 +145,8 @@ const ContextProvider = ({ children }) => {
     try {
       await api.delete(`/members/${id}`);
       await fetchMembers(); 
-      Notify("success", "Member Deleted");
-    } catch (err) { Notify("failure", "Failed to delete member"); console.error(err); }
+      Notify("success", "Information Deleted");
+    } catch (err) { Notify("failure", "Failed to send request"); console.error(err); }
   };
 
   const markattendance = (memberId, status) => {
@@ -179,9 +179,9 @@ const ContextProvider = ({ children }) => {
     try {  
       await api.put(`/attendance/mark/${_id}`, alldata);
       await fetchAttendance(); 
-      Notify('success', "Attendance submitted");
+      Notify('success', "Attendance submitted, all changes saved!!");
     } catch (err) {
-      Notify("failure", "Failed to submit attendance");
+      Notify("failure", "Failed to send request");
       console.error(err);
     }
   };
