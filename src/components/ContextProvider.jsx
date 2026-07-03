@@ -6,7 +6,7 @@ export const all_provider = createContext();
 const first_url =  "https://teens-attendance-backend.onrender.com/api"
 const second_url = "http://localhost:5000/api"
 const api = axios.create({
-  baseURL: second_url,
+  baseURL: first_url,
   timeout: 15000, 
   headers: {
     'Content-Type': 'application/json',
