@@ -193,7 +193,7 @@ const AllAttendance = () => {
 
         <div className="grid gap-4">
           {filtersearch.length > 0?
-            [...filtersearch].reverse().map((att, i) => {
+            [...filtersearch].map((att, i) => {
               const total = att.roll.length;
               const present = att.roll.filter(p => p.present === true).length;
               const absent = total - present;
